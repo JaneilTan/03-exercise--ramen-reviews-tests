@@ -27,7 +27,24 @@ describe("Ramen Reviews App", () => {
     expect(options.length).toBe(4);
   });
 
-  test.todo("renders 10 Ramen Reviews");
+  test("renders 10 Ramen Reviews", () => {
+    
+  const displayReviews = screen.getByText("Reviews to display: 10");
+  userEvent.click(displayReviews);
 
-  test.todo("renders 25 reviews when option 25 is selected");
+  const reviewElements = screen.getAllByRole("link");
+  expect(reviewElements).toHaveLength(10);
+
+  });
+
+  test("renders 25 reviews when option 25 is selected", () => {
+    
+  const selectElement = screen.getByRole("combobox");
+
+  userEvent.selectOptions(selectElement, "25");
+
+  const reviewLinks =  screen.getAllByRole("link");
+  expect(reviewLinks).toHaveLength(25);
+  
+  });
 });
